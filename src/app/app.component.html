@@ -237,7 +237,7 @@
 
         .login {
           width: 100%;
-          height: 640px;
+          height: 655px;
           background-color: #fff;
           padding: 15px;
           padding-top: 20px;
@@ -392,6 +392,7 @@
             <form>
               <div class="form-group">
                 <input [(ngModel)]="playlistUrl" type="text" name="name" class="form-control" placeholder="Playlist URL" required/>
+                <!-- <input [(ngModel)]="videoUrl" type="text" name="name" class="form-control" placeholder="Video URL" required/> -->
               </div>
 
               <div class="form-group">
@@ -436,13 +437,18 @@
               <br>
 
               <div *ngIf="videoList[0]" class="scroll-left">
-                <marquee behavior="scroll" direction="left">{{videoList[0].title}}</marquee>
+                <marquee behavior="scroll" direction="left">{{ videoList[0].title }}</marquee>
+                <a [href]="getVideoLink()" [target]="_blank">Youtube link</a>
               </div>
 
               <audio #audioOption controls>
                 Your browser does not support the
                 <code>audio</code> element.
               </audio>
+
+              <!-- <div *ngFor="let item of videoList;">
+                <p>{{ item.title }}</p>
+              </div> -->
             </form>
 
           </div>

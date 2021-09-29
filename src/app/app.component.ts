@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   videoList: Array<Song> = [];
 
   playlistUrl;
+  videoUrl;
   model = 1;
   shuffleInput = false;
 
@@ -57,16 +58,18 @@ export class AppComponent implements OnInit {
 
     this.loading = true;
     this.httpClient.get(url).subscribe(playlistItem => {
-      console.log(playlistItem);
       this.playlistItem = playlistItem;
       this.playlistItem.items.forEach(element => {
+        if (element.snippet.title === 'Private video' || element.snippet.title === 'Deleted video') {
+          return;
+        }
         let song: Song = new Song();
         song.title = element.snippet.title;
         song.videoId = element.snippet.resourceId.videoId;
         this.videoList.push(song);
       });
 
-      if(this.shuffleInput){
+      if (this.shuffleInput) {
         this.shuffle(this.videoList);
       }
 
@@ -106,7 +109,7 @@ export class AppComponent implements OnInit {
       this.audioPlayerRef.nativeElement.play();
       this.loading = false;
       // this.audioPlayerRef.nativeElement.currentTime = 240;
-      this.audioPlayerRef.nativeElement.playbackRate = 1; 
+      // this.audioPlayerRef.nativeElement.playbackRate = 1;
     });
   }
 
@@ -136,6 +139,10 @@ export class AppComponent implements OnInit {
     }
   
     return array;
+  }
+
+  getVideoLink() {
+    return 'https://www.youtube.com/watch?v=' + this.videoList[0].videoId;
   }
 }
 
