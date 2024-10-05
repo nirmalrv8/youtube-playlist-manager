@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  apiKey = 'AIzaSyB7jQHmIh-3RCvyZeVBb1eeTn_8SQDjBrc';
+  apiKey = 'get_from_secret_manager';
   ytApiLink = 'https://www.yt-download.org/api/button/mp3/';
   htmlDoc: string;
   audioElement;
